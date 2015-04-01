@@ -1,5 +1,11 @@
-import {List,Map,fromJS} from 'immutable';
-import {partition, shuffle, repeat, keep, prop} from './util.js';
+var List = require('immutable').List;
+var Map = require('immutable').Map;
+var fromJS = require('immutable').fromJS;
+var partition = require('./util').partition;
+var shuffle = require('./util').shuffle;
+var repeat = require('./util').repeat;
+var keep = require('./util').keep;
+var prop = require('./util').prop;
 
 function initTiles(rows, cols, mines) {
   return shuffle(repeat(mines, Map({isMine: true, isRevealed: false})).
@@ -54,7 +60,7 @@ function w(game, tile) {
   return onWEdge(game, tile) ? null : idx(game, tile - 1);
 }
 
-const directions = [nw, n, ne, e, se, s, sw, w];
+var directions = [nw, n, ne, e, se, s, sw, w];
 
 function neighbours(game, tile) {
   return keep(directions, function (dir) {
@@ -72,15 +78,15 @@ function isMine(game, tile) {
 }
 
 function isSafe(game) {
-  const tiles = game.get('tiles');
-  const mines = tiles.filter(prop('isMine'));
+  var tiles = game.get('tiles');
+  var mines = tiles.filter(prop('isMine'));
   return mines.filter(prop('isRevealed')) === 0 &&
     tiles.length - mines.length === tiles.filter(prop('isRevealed')).length;
 }
 
-export function isGameOver(game) {
+exports.isGameOver = function isGameOver(game) {
   return isSafe(game) || game.get('isDead');
-}
+};
 
 function addThreatCount(game, tile) {
   return game.setIn(['tiles', tile, 'threatCount'], getMineCount(game, tile));
@@ -107,7 +113,7 @@ function attemptWinning(game) {
 }
 
 function revealMine(tile) {
-  return tile.isMine ? tile.set('isRevealed', true) : tile;
+  return tile.get('isMine') ? tile.set('isRevealed', true) : tile;
 }
 
 function revealMines(game) {
@@ -116,19 +122,19 @@ function revealMines(game) {
   });
 }
 
-export function revealTile(game, tile) {
-  const updated = !game.getIn(['tiles', tile]) ?
+exports.revealTile = function revealTile(game, tile) {
+  var updated = !game.getIn(['tiles', tile]) ?
           game : game.setIn(['tiles', tile, 'isRevealed'], true);
   return isMine(updated, tile) ?
     revealMines(updated.set('isDead', true)) :
     attemptWinning(revealAdjacentSafeTiles(updated, tile));
-}
+};
 
-export function createGame(options) {
+exports.createGame = function createGame(options) {
   return fromJS({
     cols: options.cols,
     rows: options.rows,
     playingTime: 0,
     tiles: initTiles(options.rows, options.cols, options.mines)
   });
-}
+};

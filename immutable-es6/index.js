@@ -38,4 +38,15 @@ channel.on('reveal', (tile) => {
   }
 });
 
-render();
+if (/bench/.test(window.location.href)) {
+  console.time('Reveal all non-mine tiles');
+  render();
+  game.get('tiles').forEach(function (tile) {
+    if (!tile.get('isMine')) {
+      channel.emit('reveal', tile.get('id'));
+    }
+  });
+  console.timeEnd('Reveal all non-mine tiles');
+} else {
+  render();
+}

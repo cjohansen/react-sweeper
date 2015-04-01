@@ -1,0 +1,139 @@
+@font-face {
+  font-family: 'Averia Sans Libre';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Averia Sans Libre Regular'), local('AveriaSansLibre-Regular'), url(averia.ttf) format('truetype');
+}
+
+body {
+    background: #b5afa7 no-repeat 23px 30px;
+    background-size: 380px;
+    font-family: 'Averia Sans Libre', helvetica, Sans, sans-serif;
+}
+
+.watermark {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+#main {
+    margin: 0 auto 0;
+    width: 800px;
+}
+
+.toolbar {
+    border: 10px solid #a49e96;
+    border-radius: 10px;
+    font-size: 18px;
+    margin: 20px;
+    background: #938d85;
+    display: inline-block;
+}
+
+button {
+    border: none;
+    background: transparent;
+    color: #000;
+    font-weight: bold;
+    outline: none;
+    font-size: 16px;
+    font-family: 'Averia Sans Libre', helvetica, Sans, sans-serif;
+}
+
+button.disabled {
+    color: #666;
+    font-weight: normal;
+}
+
+button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button.disabled:hover {
+    cursor: default;
+    text-decoration: none;
+}
+
+.time {
+    background: #736d65;
+    display: inline-block;
+    padding: 6px 10px;
+}
+
+.board {
+    border: 10px solid #a49e96;
+    border-radius: 10px;
+    margin: 20px;
+    background: #938d85;
+    display: inline-block;
+}
+
+.tile {
+    position: relative;
+    border: 1px solid #504d49;
+    width: 30px;
+    height: 30px;
+    float: left;
+    color: #100d09;
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.threat2 {
+    color: #500d09;
+}
+
+.threat3 {
+    color: #700d09;
+}
+
+.threat4 {
+    color: #900d09;
+}
+
+.threat5 {
+    color: #b00d09;
+}
+
+.threat6 {
+    color: #e00d09;
+}
+
+.threat7 {
+    color: #f00d09;
+}
+
+.threat8 {
+    color: #ff0000;
+}
+
+.lid {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px outset #a49e96;
+    background-image:
+    radial-gradient(
+        circle at top left,
+        #a49e96,
+        #605d59
+    );
+}
+
+.lid:hover {
+    background-image:
+    radial-gradient(
+        circle at bottom right,
+        #a49e96,
+        #605d59
+    );
+}
+
+.mine { background: url(../images/danger.png); }
