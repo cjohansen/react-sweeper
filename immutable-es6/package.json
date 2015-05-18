@@ -15,6 +15,7 @@
     "browserify": "~9.0.3"
   },
   "dependencies": {
+    "immutable": "~3.7.2",
     "babel": "~4.6.1",
     "react": "~0.12.2"
   }
