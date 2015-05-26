@@ -39,6 +39,8 @@ revealing every tile that does not have a mine, and print the full time in the
 console. This is not the world's most scientific benchmark, but if you hit
 refresh a few times, you get a picture of the average, and the difference is big
 enough to notice with a fairly small dataset.
+You will likely see the mutable version being the slowest and the immutable ES6
+version being the fastest.
 
 ## ES6
 
